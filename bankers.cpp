@@ -32,6 +32,7 @@ void bankers()
 				count++;
 				finish[i]= true;
 				cout<<"Process "<<i<<"\n";
+				break;
 			}
 	}
 }
