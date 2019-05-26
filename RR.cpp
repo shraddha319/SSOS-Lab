@@ -7,7 +7,7 @@ void display()
 {
 	printf("\npid\tat\tbt\tct\ttat\twt\n");
 	for(int i=0;i<n;i++)
-		printf("\n%d\t%d\t%d\t%d\t%d\t%d\n",i,at[i],bt[i],ct[i],tat[i],wt[i]);
+		printf("%d\t%d\t%d\t%d\t%d\t%d\n",i,at[i],bt[i],ct[i],tat[i],wt[i]);
 }
 
 bool present(int process,int * cirq)
@@ -34,18 +34,8 @@ void rr(int quantum)
 
 	while(count!=n)
 	{
-		//printf("\n%d %d %d\n",t,cirq[front],cirq[rear]);
-
 		nextp = cirq[front];
 		front = (front+1)%n;
-
-		for(int i=0;i<n;i++){
-			if(at[i]<=t && rt[i]>0 && !present(i,cirq)){
-				rear = (rear+1)%n;
-				cirq[rear] = i;
-				printf("\n^^%d^^\n",i);
-			}
-		}
 
 		if(rt[nextp]<=quantum){
 			t += rt[nextp];
@@ -59,6 +49,15 @@ void rr(int quantum)
 		else{
 			t += quantum;
 			rt[nextp] -= quantum;
+		}
+
+		for(int i=0;i<n;i++)
+			if(at[i]<=t && rt[i]>0 && !present(i,cirq)){
+				rear = (rear+1)%n;
+				cirq[rear] = i;
+		}
+
+		if(rt[nextp]>0){
 			rear = (rear+1)%n;
 			cirq[rear] = nextp;
 		}

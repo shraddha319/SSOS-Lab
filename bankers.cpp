@@ -18,13 +18,15 @@ bool execute(int process)
 void bankers()
 {
 	bool finish[n] = {false};
-	int count=0;
-	cout<<"\nSequnce of execution:\n";
+	int count=0, flag=0;
+	cout<<"\nSequence of execution:\n";
 	while(count!=n)
 	{
+		flag = 0;
 		for(int i=0;i<n;i++)
 			if(!finish[i] && execute(i))
 			{
+				flag = 1;
 				for(int j=0;j<r;j++){
 					avail[j] += allocated[i][j];
 					need[i][j] = 0;
@@ -34,6 +36,11 @@ void bankers()
 				cout<<"Process "<<i<<"\n";
 				break;
 			}
+		if(flag==0)
+		{
+			printf("Sequence not possible\n");
+			break;
+		}
 	}
 }
 

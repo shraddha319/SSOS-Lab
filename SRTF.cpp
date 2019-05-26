@@ -36,7 +36,7 @@ void srtf()
 			nextp = i;
 	}
 	t = at[nextp];
-	printf("%d\n",nextp);
+	//printf("%d\n",nextp);
 	while(count!=n)
 	{
 		rt[nextp] -= 1;
